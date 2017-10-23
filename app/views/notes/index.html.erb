@@ -5,9 +5,6 @@
 
                 <% @all_notes.each do |note|%>
                     <li>
-                        <%= note.content%>
-                            <li>
-                                <%= note.slug%>
-                            </li>
+                        <%= link_to note.slug, '/' + note.slug%>
                     </li>
                     <% end %>

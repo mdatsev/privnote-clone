@@ -6,6 +6,10 @@ class NotesController < ApplicationController
     #POST /notes
     def create
         Note.new({content: params[:content] , slug: "doesnt work"}).save
-        redirect_to "/notes"
+        redirect_to "/"
+    end
+    #GET /notes/:slug
+    def show
+        @note = Note.find_by slug: params[:slug]
     end
 end
