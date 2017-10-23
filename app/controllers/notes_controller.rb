@@ -12,5 +12,10 @@ class NotesController < ApplicationController
     #GET /notes/:slug
     def show
         @note = Note.find_by slug: params[:slug]
+        if @note.nil?
+            render "note_deleted"
+        else
+            @note.destroy        
+        end
     end
 end
