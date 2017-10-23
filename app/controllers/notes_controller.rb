@@ -5,8 +5,9 @@ class NotesController < ApplicationController
     end
     #POST /notes
     def create
-        Note.new({content: params[:content] , slug: "doesnt work"}).save
-        redirect_to "/"
+        note = Note.new({content: params[:content]})
+        note.save
+        render "link_info", :locals => {url: request.base_url + "/" + note.slug};
     end
     #GET /notes/:slug
     def show
