@@ -5,7 +5,7 @@ class NotesController < ApplicationController
     end
     #POST /notes
     def create
-        Note.new({content: params[:content] , slug: "123"}).save
+        Note.new({content: params[:content] , slug: "doesnt work"}).save
         redirect_to "/notes"
     end
 end
