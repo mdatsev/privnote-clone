@@ -1,1 +1,10 @@
-helo
+<%= form_tag() do %>
+    <%= text_area_tag 'content' %>
+        <%= submit_tag("Submit") %>
+            <% end %>
+
+                <% @all_notes.each do |note|%>
+                    <li>
+                        <%= note.content%>
+                    </li>
+                    <% end %>
