@@ -2,9 +2,3 @@
     <%= text_area_tag 'content' %>
         <%= submit_tag("Submit") %>
             <% end %>
-
-                <% @all_notes.each do |note|%>
-                    <li>
-                        <%= link_to note.slug, '/' + note.slug%>
-                    </li>
-                    <% end %>
