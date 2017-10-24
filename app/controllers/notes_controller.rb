@@ -5,12 +5,11 @@ class NotesController < ApplicationController
     end
     #POST /notes
     def create
-        note = Note.new({content: params[:content]})
-        note.save
+        note = Note.create({content: params[:content]})
         render "link_info", :locals => {url: request.base_url + "/" + note.slug};
     end
     #GET /notes/:slug
-    def show
+    def show 
         @note = Note.find_by slug: params[:slug]
         if @note.nil?
             render "note_deleted"

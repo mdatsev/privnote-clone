@@ -1,4 +1,7 @@
-<%= form_tag() do %>
-    <%= text_area_tag 'content' %>
-        <%= submit_tag("Submit") %>
-            <% end %>
+<div class="form-group">
+    <label for="content">Write a note:</label>
+    <%= form_tag() do %>
+        <%= text_area_tag 'content', nil, class: "form-control"%>
+            <%= submit_tag "Submit", class: "btn btn-default" %>
+                <% end %>
+</div>

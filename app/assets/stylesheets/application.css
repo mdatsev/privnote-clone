@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+
+ /* make navbar not overlap content */
+ body { padding-top: 70px; }
