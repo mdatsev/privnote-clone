@@ -11,9 +11,10 @@ class User < ActiveRecord::Base
       self.password = nil
     end
     attr_accessor :password
-    EMAIL_REGEX = /\S+@\S+\.\S+/
-    validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
-    validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
-    validates :password, :confirmation => true #password_confirmation attr
-    validates_length_of :password, :in => 6..20, :on => :create
+    EMAIL_REGEX = /\A\S+@\S+\.\S+\z/
+    USERNAME_REGEX = /\A\w+\z/
+    validates :username, presence: true, uniqueness: true,  format: USERNAME_REGEX
+    validates :email, presence: true, uniqueness: true, format: EMAIL_REGEX
+    validates :password, confirmation: true
+    validates_length_of :password, in: 6..20, on: create
   end
