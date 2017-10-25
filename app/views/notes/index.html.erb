@@ -1,7 +1,7 @@
-<div class="form-group">
-    <label for="content">Write a note:</label>
-    <%= form_tag() do %>
+<%= form_tag() do %>
+    <div class="form-group">
+        <label for="username">Write a note...</label>        
         <%= text_area_tag 'content', nil, class: "form-control"%>
-            <%= submit_tag "Submit", class: "btn btn-default" %>
-                <% end %>
-</div>
+    </div>
+    <%= submit_tag "Submit", class: "btn btn-default" %>
+<% end %>

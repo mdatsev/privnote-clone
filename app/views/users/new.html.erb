@@ -1,2 +1,28 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% @page_title = "UserAuth | Signup" -%>
+
+<% if @user.errors.any? %>
+    <% for message_error in @user.errors.full_messages %>
+        <p class="text-danger"> <%= message_error %> </p>
+    <% end %>
+<% end %>
+
+<h1>Sign Up</h1>
+<%= form_for @user, :url => "/users/new/" do |f| %>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <%= f.text_field :username, class: "form-control"%>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <%= f.email_field :email, class: "form-control"%>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <%= f.password_field :password, class: "form-control"%>
+    </div>
+    <div class="form-group">
+        <label for="password_confirmation">Confimrm password:</label>
+        <%= f.password_field :password_confirmation, class: "form-control"%>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+<%end%>
