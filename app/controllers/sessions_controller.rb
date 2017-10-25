@@ -6,10 +6,11 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:session][:username_or_email], params[:session][:password])
     if user
       # Log the user in and redirect to the user's show page.
-      puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
+      flash.now[:success] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
+      render 'new'
     else
       # Create an error message.
-      puts "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO WRONG!!!!"    
+      flash.now[:danger] = "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO WRONG!!!!"    
       render 'new'
     end
   end

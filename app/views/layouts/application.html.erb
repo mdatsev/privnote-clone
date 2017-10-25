@@ -47,6 +47,11 @@
   </nav>
   <main role="main" class="container">
     <div class="page-header">
+        <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+              <%= value %>
+        </div>
+      <% end %>
       <h1><%= yield :title %></h1> 
      </div>
     <%= yield %>
