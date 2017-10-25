@@ -6,12 +6,12 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:session][:username_or_email], params[:session][:password])
     if user
       # Log the user in and redirect to the user's show page.
-      flash[:success] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
-      log_in user
+      log_in user      
+      flash[:success] = "Welcome back, " + user.username
       redirect_to root_path
     else
       # Create an error message.
-      flash.now[:danger] = "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO WRONG!!!!"    
+      flash.now[:danger] = "Wrong email/usename/password"    
       render 'new'
     end
   end
