@@ -6,7 +6,7 @@ class NotesController < ApplicationController
     #POST /notes
     def create
         note = Note.create({content: params[:content]})
-        render "link_info", locals: {url: request.base_url + "/" + note.slug};
+        render "link_info", locals: {url: notes_url + note.slug};
     end
     #GET /notes/:slug
     def show 
