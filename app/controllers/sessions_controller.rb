@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:session][:username_or_email], params[:session][:password])
     if user
       # Log the user in and redirect to the user's show page.
-      flash.now[:success] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
+      flash[:success] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
       log_in user
       redirect_to root_path
     else
