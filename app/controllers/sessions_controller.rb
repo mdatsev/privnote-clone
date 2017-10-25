@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     if user
       # Log the user in and redirect to the user's show page.
       flash.now[:success] = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa YOU LOGGED!!!!!"
-      render 'new'
+      log_in user
+      redirect_to root_path
     else
       # Create an error message.
       flash.now[:danger] = "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO WRONG!!!!"    

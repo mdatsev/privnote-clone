@@ -30,21 +30,32 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Write a new note
+          <%= link_to "Write a new note", root_path, class: "nav-link"%>
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="/users/new/">Sign up</a>
-          </li>
         <li class="nav-item">
           <a class="nav-link disabled">FAQ</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/mdatsev/privnote-clone">About</a>
         </li>
+        <% if logged_in? %>
+            <li class="dropdown nav-item">
+              <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a> 
+              <ul class="dropdown-menu">
+                <li><%= link_to "Log out", logout_path, method: :delete %></li>
+                <li><%= link_to "Profile", current_user %></li>
+              </ul>
+            </li>
+        <% else %>
+        <li class="nav-item active">
+            <%= link_to "Log in", login_path %>
+          </li>
+        <% end %>
     </div>
   </nav>
+
   <main role="main" class="container">
     <div class="page-header">
         <% flash.each do |key, value| %>
