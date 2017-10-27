@@ -3,7 +3,7 @@ class Note < ApplicationRecord
     private
     def generate_slug
       loop do
-        self.slug = SecureRandom.urlsafe_base64(32)
+        self.slug = SecureRandom.urlsafe_base64
         break unless Note.where(slug: slug).exists?
       end
     end

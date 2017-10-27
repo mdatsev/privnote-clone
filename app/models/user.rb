@@ -26,10 +26,21 @@ class User < ActiveRecord::Base
       self.encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
     end
     attr_accessor :password
+    attr_accessor :remember_token
     EMAIL_REGEX = /\A\S+@\S+\.\S+\z/
     USERNAME_REGEX = /\A\w+\z/
     validates :username, presence: true, uniqueness: true,  format: USERNAME_REGEX
     validates :email, presence: true, uniqueness: true, format: EMAIL_REGEX
     validates :password, confirmation: true
     validates_length_of :password, in: 6..20, on: create
+    def User.new_token
+      SecureRandom.urlsafe_base64
+    end
+    def remember
+      self.remember_token = User.new_token
+      update_attribute(:remember_digest, BCrypt::Password.create(remember_token))
+    end
+    def authenticated?(remember_token)
+      BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    end
   end
