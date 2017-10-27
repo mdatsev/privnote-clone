@@ -1,1 +1,46 @@
 Hello, <%= @user.username %>
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="paypal-button"><input type="hidden" name="custom" value="YOUR VALUE FROM DB"/></div>
+    
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    
+    <script>
+        paypal.Button.render({
+    
+            env: 'sandbox', // Or 'sandbox'
+    
+            client: {
+                sandbox:    'AWIHHM_39Tc0HL5CNT7fC8_NBKPgT27aVpmH295s6p1eVE1RjcK0KMzhE93YA_KhUmpp2VxdoIXDMtmU',
+                production: 'xxxxxxxxx'
+            },
+    
+            commit: true, // Show a 'Pay Now' button
+    
+            payment: function(data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '1.00', currency: 'USD' }
+                            }
+                        ]
+                    }
+                });
+            },
+    
+            onAuthorize: function(data, actions) {
+                return actions.payment.execute().then(function(payment) {
+                    console.log(data);
+                });
+            }
+    
+        }, '#paypal-button');
+    </script>
+</body>
