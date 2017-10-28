@@ -9,7 +9,10 @@ class PaypalController < ApplicationController
     def create
         info = params[:resource]                
         puts verify_payment(params[:event_type], info[:state], info[:amount][:total], info[:amount][:currency])
-        p info[:custom]
+        uid = info[:custom].to_i
+        user = User.find(uid)
+        user.pro = true
+        user.save
         head :ok
     end
 end

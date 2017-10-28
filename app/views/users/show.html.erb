@@ -1,4 +1,5 @@
 Hello, <%= @user.username %>
+Pro: <%= @user.pro %>
 <!DOCTYPE html>
 
 <head>
@@ -29,7 +30,7 @@ Hello, <%= @user.username %>
                         transactions: [
                             {
                                 amount: { total: '1.00', currency: 'USD' },
-                                custom: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                custom: "<%= @user.id%>"
                             }
                         ]
                     }
