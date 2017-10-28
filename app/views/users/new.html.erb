@@ -1,11 +1,5 @@
 <% content_for :title, "Sign up" %>
 
-<% if @user.errors.any? %>
-    <% for message_error in @user.errors.full_messages %>
-        <p class="text-danger"> <%= message_error %> </p>
-    <% end %>
-<% end %>
-
 <%= form_for @user, url: new_user_path do |f| %>
     <div class="form-group">
         <label for="username">Username:</label>

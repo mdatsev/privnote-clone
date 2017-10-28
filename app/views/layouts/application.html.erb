@@ -58,13 +58,19 @@
 
   <main role="main" class="container">
     <div class="page-header">
-        <% flash.each do |key, value| %>
-        <div class="<%= flash_class(key) %>">
-              <%= value %>
-        </div>
-      <% end %>
       <h1><%= yield :title %></h1> 
      </div>
+      <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %>">
+          <%= value %>
+        </div>
+      <% end %>
+      <% if @errors && @errors.any? %>
+        <% for message_error in @errors.full_messages%>
+          <p class="text-danger"> <%= message_error %> </p>
+        <% end %>
+      <% end %>
+
     <%= yield %>
   </main>
 

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome aboard!"
       redirect_to root_path
     else
+      @errors = @user.errors
       render 'new'
     end   
   end
