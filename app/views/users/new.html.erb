@@ -2,19 +2,19 @@
 
 <%= form_for @user, url: new_user_path do |f| %>
     <div class="form-group">
-        <label for="username">Username:</label>
+        <%= f.label :username, "Username:" %>
         <%= f.text_field :username, class: "form-control"%>
     </div>
     <div class="form-group">
-        <label for="email">Email:</label>
+        <%= f.label :email, "Email:" %>
         <%= f.email_field :email, class: "form-control"%>
     </div>
     <div class="form-group">
-        <label for="password">Password:</label>
+        <%= f.label :paswword, "Password:" %>
         <%= f.password_field :password, class: "form-control"%>
     </div>
     <div class="form-group">
-        <label for="password_confirmation">Confimrm password:</label>
+        <%= f.label :password_confirmation, "Confirm password:" %>
         <%= f.password_field :password_confirmation, class: "form-control"%>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>

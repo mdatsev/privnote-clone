@@ -2,15 +2,15 @@
 
 <%= form_for @note, url: create_note_path do |f| %>
 <div class="form-group">
-    <label for="username">Write a note:</label>
+    <%= f.label :content, "Write a note:" %>
     <%= f.text_area :content, class: "form-control"%>
 </div>
 <div class="form-group">
-    <label for="email">Callback email:</label>
+    <%= f.label :email, "Callback email:" %>
     <%= f.email_field :email, class: "form-control"%>
 </div>
 <div class="form-group">
-    <label for="password">Password:</label>
+    <%= f.label :email, "Note passowrd:" %>
     <%= f.password_field :password, class: "form-control"%>
 </div>
 <button type="submit" class="btn btn-default">Submit</button>
