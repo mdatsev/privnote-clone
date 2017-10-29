@@ -8,9 +8,10 @@ Rails.application.routes.draw do
 
   post '/paypal', to: "paypal#create"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :notes, param: :slug, path: '/'
+  root 'notes#new'
+  post '/', to: 'notes#create', as:"notes"
+  get '/:slug', to: 'notes#show'
+  post '/:slug/raw', to: 'notes#raw'
   resources :users
-  post '/create_note', to: 'notes#create'  
   post '/users/new', to: 'users#create'
-  root 'notes#index'
 end

@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
     #GET /notes
-    def index
+    def new
         @note = Note.new
     end
     #POST /notes
@@ -19,9 +19,12 @@ class NotesController < ApplicationController
         @note = Note.find_by slug: params[:slug]
         if @note.nil?
             render "note_deleted"
-        else
-            @note.destroy        
         end
+    end
+    def raw
+        @note = Note.find_by slug: params[:slug]
+        @note.destroy
+        render plain: @note.content
     end
 
     private

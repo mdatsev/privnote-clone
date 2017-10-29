@@ -1,2 +1,14 @@
 <% content_for :title, "Note" %>
-<%= @note.content %>
+<button id="view">View and delete</button>
+<script>
+        $("#view").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                method: "POST",
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                url: "<%=@note.slug%>/raw"
+            })
+            .done(function( msg ) {
+              $("#content").html(msg)
+            })});
+</script>

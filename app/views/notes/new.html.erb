@@ -1,6 +1,6 @@
 <% content_for :title, "Create a note" %>
 
-<%= form_for @note, url: create_note_path do |f| %>
+<%= form_for @note, url: notes_path do |f| %>
 <div class="form-group">
     <%= f.label :content, "Write a note:" %>
     <%= f.text_area :content, class: "form-control"%>
