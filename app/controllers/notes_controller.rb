@@ -23,11 +23,13 @@ class NotesController < ApplicationController
     end
     def raw
         @note = Note.find_by slug: params[:slug]
-        p @note
-        @note.destroy
-        p @note
+        if !@note.authenticate(params[:password])
+            head 401
+        else
+            @note.destroy        
+            render plain: @note.content
+        end
         #NoteMailer.note_opened_email(@note).deliver_now
-        render plain: @note.content
     end
 
     private
