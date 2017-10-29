@@ -11,7 +11,7 @@
                 url: "<%=@note.slug%>/raw",
                 data: {password: $("#password").get(0).value}
             })
-            .done(content => $("#content").html(content))
+            .done(content => $("#content").html(content.replace(/\n/g, '<br />')))
             .fail((er) => alert(er.statusText))
         });
 </script>
