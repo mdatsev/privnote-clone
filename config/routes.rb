@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'notes#new'
   post '/', to: 'notes#create', as:"notes"
   get '/:slug', to: 'notes#show'
+  get '/:slug/info', to: 'notes#info'
   post '/:slug/raw', to: 'notes#raw'
   resources :users
   post '/users/new', to: 'users#create'

@@ -8,11 +8,14 @@ class NotesController < ApplicationController
         @note = Note.new(note_params)
         @note.author = current_user
         if @note.save
-            render "link_info", locals: {url: notes_url + @note.slug};           
+            redirect_to notes_url + @note.slug + '/info'
         else
             @errors = @note.errors
             render 'index'
         end
+    end
+    def info
+        render "link_info", locals: {url: notes_url + params[:slug]}
     end
     #GET /notes/:slug
     def show 
