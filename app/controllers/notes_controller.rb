@@ -26,7 +26,7 @@ class NotesController < ApplicationController
     end
     def raw
         @note = Note.find_by slug: params[:slug]
-        if !@note.authenticate(params[:password])
+        if @note.password_digest && !@note.authenticate(params[:password])
             head 401
         else
             @note.destroy        
