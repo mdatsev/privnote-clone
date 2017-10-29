@@ -23,7 +23,10 @@ class NotesController < ApplicationController
     end
     def raw
         @note = Note.find_by slug: params[:slug]
+        p @note
         @note.destroy
+        p @note
+        #NoteMailer.note_opened_email(@note).deliver_now
         render plain: @note.content
     end
 
