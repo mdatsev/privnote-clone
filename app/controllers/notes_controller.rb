@@ -11,7 +11,7 @@ class NotesController < ApplicationController
             redirect_to notes_url + @note.slug + '/info'
         else
             @errors = @note.errors
-            render 'index'
+            render 'new'
         end
     end
     def info
