@@ -26,24 +26,18 @@
     <a class="navbar-brand" href="/">
       <%= image_tag "logo.png", size: "35x35"%>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <%= link_to "Write a new note", root_path, class: "nav-link"%>
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">FAQ</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/mdatsev/privnote-clone">About</a>
-        </li>
+      <ul class="navbar-nav">
+
+        <%= link_to "Write a new note", root_path, class: "nav-link"%>
+          <span class="sr-only">(current)</span>
+        </a>
+        
+        <a class="nav-link disabled">FAQ</a>
+
+        <a class="nav-link" href="https://github.com/mdatsev/privnote-clone">About</a>
+
         <% if logged_in? %>
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a> 
@@ -53,9 +47,7 @@
               </ul>
             </li>
         <% else %>
-        <li class="nav-item active">
-            <%= link_to "Log in", login_path %>
-          </li>
+            <%= link_to "Log in", login_path, class: "nav-link" %>
         <% end %>
     </div>
   </nav>
