@@ -1,7 +1,7 @@
 <% content_for :title, "Note" %>
-<label for="password">password:</label>
-<input type="password" id="password"><br>
-<button id="view">View and delete</button>
+<button id="view" class="btn btn-primary">View and delete</button><br>
+<label for="password">Password(optional):</label>
+<input type="password" id="password" class="form-control"><br>
 <script>
         $("#view").click((e) => {
             e.preventDefault();
