@@ -8,16 +8,16 @@ class NotesController < ApplicationController
         if request.content_type =~ /xml/
             params[:message] = Hash.from_xml(request.body.read)["message"]
             note = Note.create(note_params_api)
-            render xml: 
+            render xml:
             '<?xml version = "1.0" encoding = "UTF-8" standalone ="yes"?>' +
-            '<url>' + 
+            '<url>' +
                 notes_url + note.slug + "/raw" +
-            '</url>';    
+            '</url>';
         elsif request.content_type =~ /json/
             note = Note.create(note_params_api)
             render json: {url: notes_url + note.slug + '/raw'}
         elsif request.content_type =~ /form/
-            @note = Note.create(note_params)
+            @note = Note.new(note_params)
             @note.author = current_user
             if @note.save
                 redirect_to notes_url + @note.slug + '/info'
@@ -52,14 +52,14 @@ class NotesController < ApplicationController
         #NoteMailer.note_opened_email(@note).deliver_now
     end
 
-    private
+    private         
     
     def note_params
         params.require(:note).permit(:content,:message ,:email, :password)
     end 
 
     def note_params_api
-        params.permit(:content,:message ,:email, :password)
+        params.permit(:content, :message, :email, :password)
     end 
 
 end
