@@ -5,14 +5,52 @@ class NotesController < ApplicationController
     end
     #POST /notes
     def create
-        @note = Note.new(note_params)
-        @note.author = current_user
-        if @note.save
-            redirect_to notes_url + @note.slug + '/info'
+        if request.content_type =~ /xml/
+            params[:message] = Hash.from_xml(request.body.read)["message"]
+            note = Note.create(note_params_api)
+            render xml: 
+            '<?xml version = "1.0" encoding = "UTF-8" standalone ="yes"?>' +
+            '<url>' + 
+                notes_url + note.slug + "/raw" +
+            '</url>';    
+        elsif request.content_type =~ /json/
+            note = Note.create(note_params_api)
+            render json: {url: notes_url + note.slug + '/raw'}
+        elsif request.content_type =~ /form/
+            @note = Note.create(note_params)
+            @note.author = current_user
+            if @note.save
+                redirect_to notes_url + @note.slug + '/info'
+            else
+                @errors = @note.errors
+                render 'new'
+            end
         else
-            @errors = @note.errors
-            render 'new'
+            head 415
         end
+
+        #note = Note.new(note_params_api)            
+        #if request.content_type.xml?
+        #    string = request.body.read
+        #    attributes = Hash.from_xml(string)
+        #    note = Note.new()
+        #    note.content = attributes["message"]
+        #end
+        #note.save
+        #res = {url: notes_url + note.slug + '/raw'}     
+        #format.json  { render :json => res }
+        #format.xml  { 
+        #    render :xml => res }            
+        #format.html {
+        #    @note = Note.new(note_params)
+        #    @note.author = current_user
+        #    if @note.save
+        #        redirect_to notes_url + @note.slug + '/info'
+        #    else
+        #        @errors = @note.errors
+        #        render 'new'
+        #    end
+        #}
     end
     def info
         render "link_info", locals: {url: notes_url + params[:slug]}
@@ -26,7 +64,9 @@ class NotesController < ApplicationController
     end
     def raw
         @note = Note.find_by slug: params[:slug]
-        if @note.password_digest && !@note.authenticate(params[:password])
+        if !@note 
+            head 404
+        elsif @note.password_digest && !@note.authenticate(params[:password])
             head 401
         else
             @note.destroy        
@@ -38,7 +78,11 @@ class NotesController < ApplicationController
     private
     
     def note_params
-        params.require(:note).permit(:content, :email, :password)
+        params.require(:note).permit(:content,:message ,:email, :password)
+    end 
+
+    def note_params_api
+        params.permit(:content,:message ,:email, :password)
     end 
 
 end
