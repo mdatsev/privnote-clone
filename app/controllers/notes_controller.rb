@@ -28,29 +28,6 @@ class NotesController < ApplicationController
         else
             head 415
         end
-
-        #note = Note.new(note_params_api)            
-        #if request.content_type.xml?
-        #    string = request.body.read
-        #    attributes = Hash.from_xml(string)
-        #    note = Note.new()
-        #    note.content = attributes["message"]
-        #end
-        #note.save
-        #res = {url: notes_url + note.slug + '/raw'}     
-        #format.json  { render :json => res }
-        #format.xml  { 
-        #    render :xml => res }            
-        #format.html {
-        #    @note = Note.new(note_params)
-        #    @note.author = current_user
-        #    if @note.save
-        #        redirect_to notes_url + @note.slug + '/info'
-        #    else
-        #        @errors = @note.errors
-        #        render 'new'
-        #    end
-        #}
     end
     def info
         render "link_info", locals: {url: notes_url + params[:slug]}
